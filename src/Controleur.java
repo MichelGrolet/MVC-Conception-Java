@@ -11,6 +11,11 @@ public class Controleur implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		modele.updateTexte();
+		JTextField textField = (JTextField) e.getSource();
+		String texte = textField.getText();
+		if (!texte.equals("")) {
+			modele.ajouterMot(texte);
+			modele.notifierObservateurs();
+		}
 	}
 }

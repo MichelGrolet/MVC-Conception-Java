@@ -8,17 +8,11 @@ public class Modele implements ModeleAbstrait {
 	}
 
 	public void ajouterMot(String mot) {
-		if (!mot.equals("")) this.mots.add(mot);
+		this.mots.add(mot);
 	}
 
 	public ArrayList<String> getMots() {
 		return mots;
-	}
-
-	public void updateTexte() {
-		VueDonnerChaine v = (VueDonnerChaine) observateurs.get(0);
-		ajouterMot(v.getTexte());
-		notifierObservateurs();
 	}
 
 	@Override
