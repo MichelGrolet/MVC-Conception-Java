@@ -1,15 +1,24 @@
 import javax.swing.*;
 
+/**
+ * Vue centrale de l'interface,
+ * affichant la totalité de la liste.
+ */
 public class VueListe extends JTextArea implements Observateur {
 
-	public void vueListe() {
+	/**
+	 * Empêche l'utilisateur de modifier la liste à la main.
+	 */
+	public VueListe() {
 		this.setEditable(false);
 	}
 
+	/**
+	 * Ajoute le nouveau mot à la fin de la liste.
+	 * @param m modèle sur lequel accorder la vue.
+	 */
 	@Override
 	public void actualiser(Modele m) {
-		StringBuilder mots = new StringBuilder();
-		for (String mot : m.getMots()) mots.append(mot).append("\n");
-		this.setText(String.valueOf(mots));
+		this.append(m.getMots().get(m.getMots().size()-1)+"\n");
 	}
 }

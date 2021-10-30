@@ -2,10 +2,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Vue située au SUD de l'interface,
+ * affichant le mot le plus long et le mot le plus court,
+ * les extremes de la liste.
+ */
 public class VueExtremes extends JPanel implements Observateur {
+	/**
+	 * TextField non éditable contenant le plus grand mot de la liste.
+	 */
 	private final JTextField plusGrandMot = new JTextField();
+
+	/**
+	 * TextField non éditable contenant le plus petit mot de la liste.
+	 */
 	private final JTextField plusPetitMot = new JTextField();
 
+	/**
+	 * Initialise this (en tant que JPanel).
+	 * Ajoute les deux labels et les deux textFields.
+	 */
 	public VueExtremes() {
 		this.setLayout(new GridLayout(2,2));
 		JLabel labelGrand = new JLabel("Plus grand mot", JLabel.CENTER);
@@ -18,23 +34,21 @@ public class VueExtremes extends JPanel implements Observateur {
 		this.add(this.plusPetitMot);
 	}
 
+	/**
+	 * Affiche les nouveaux plusGrand et plusPetit.
+	 * @param m modèle sur lequel accorder la vue.
+	 */
 	@Override
 	public void actualiser(Modele m) {
-		actualiserPlusGrand(m.getMots());
-		actualiserPlusPetit(m.getMots());
-	}
-
-	private void actualiserPlusGrand(ArrayList<String> mots) {
 		String plusGrand = "";
-		for (String mot : mots) if (plusGrand.equals("") || mot.length()>plusGrand.length())
-			plusGrand = mot;
-		this.plusGrandMot.setText(plusGrand);
-	}
-
-	private void actualiserPlusPetit(ArrayList<String> mots) {
 		String plusPetit = "";
-		for (String mot : mots) if (plusPetit.equals("") || mot.length()<plusPetit.length())
-			plusPetit = mot;
+		for (String mot : m.getMots()) {
+			if (plusGrand.equals("") || mot.length()>plusGrand.length())
+				plusGrand = mot;
+			if (plusPetit.equals("") || mot.length()<plusPetit.length())
+				plusPetit = mot;
+		}
+		this.plusGrandMot.setText(plusGrand);
 		this.plusPetitMot.setText(plusPetit);
 	}
 }

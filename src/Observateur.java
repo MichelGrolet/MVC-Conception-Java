@@ -1,3 +1,11 @@
+/**
+ * Permet au modèle de considérer globalement
+ * toutes les classe de vue.
+ */
 public interface Observateur {
-	public void actualiser(Modele m);
+	/**
+	 * Actualise la vue en l'accordant avec le modèle.
+	 * @param m modèle sur lequel accorder la vue.
+	 */
+	void actualiser(Modele m);
 }
